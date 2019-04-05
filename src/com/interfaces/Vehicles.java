@@ -1,4 +1,4 @@
-package com.hexad.interfaces;
+package com.interfaces;
 
 public interface Vehicles 
 {
