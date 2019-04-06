@@ -10,26 +10,22 @@ import com.interfaces.Vehicles;
 
 public class ParkingSpot implements Vehicles
 {
-	private int MAX_SIZE = 0;
-	// Available slots list
+	private int MAX_LOT_SIZE = 0;
     ArrayList<Integer> availableSlotList;
-    // Map of Slot, Car
     Map<String, VehicleEntity> map1;
-    // Map of RegNo, Slot
     Map<String, String> map2;
-    // Map of Color, List of RegNo
     Map<String, ArrayList<String>> map3;
 
 	public void createParkinglot(String lotSize)
 	{
 		try {
-            this.MAX_SIZE = Integer.parseInt(lotSize);
+            this.MAX_LOT_SIZE = Integer.parseInt(lotSize);
         } catch (Exception e) {
             System.out.println("Invalid lot count");
             System.out.println();
         }
         this.availableSlotList = new ArrayList<Integer>() {};
-        for (int i=1; i<= this.MAX_SIZE; i++) {
+        for (int i=1; i<= this.MAX_LOT_SIZE; i++) {
             availableSlotList.add(i);
         }
         this.map1 = new HashMap<String, VehicleEntity>();
@@ -41,10 +37,10 @@ public class ParkingSpot implements Vehicles
 	
 	public void parkVehicle(String vehicleRegisterNumber, String vehicleColour)
 	{
-		if (this.MAX_SIZE == 0) {
+		if (this.MAX_LOT_SIZE == 0) {
             System.out.println("Sorry, parking lot is not created");
             System.out.println();
-        } else if (this.map1.size() == this.MAX_SIZE) {
+        } else if (this.map1.size() == this.MAX_LOT_SIZE) {
             System.out.println("Sorry, parking lot is full");
             System.out.println();
         } else {
@@ -71,7 +67,7 @@ public class ParkingSpot implements Vehicles
 	
 	public void removeCarFromSlot(String slot)
 	{
-		if (this.MAX_SIZE == 0) {
+		if (this.MAX_LOT_SIZE == 0) {
             System.out.println("Sorry, parking lot is not created");
             System.out.println();
         } else if (this.map1.size() > 0) {
@@ -99,14 +95,14 @@ public class ParkingSpot implements Vehicles
 	
 	public void status() 
 	{
-        if (this.MAX_SIZE == 0) {
+        if (this.MAX_LOT_SIZE == 0) {
             System.out.println("Sorry, parking lot is not created");
             System.out.println();
         } else if (this.map1.size() > 0) {
             // Print the current status.
             System.out.println("Slot No.\tRegistration No.\tColor");
             VehicleEntity vehicleEntity;
-            for (int i = 1; i <= this.MAX_SIZE; i++) {
+            for (int i = 1; i <= this.MAX_LOT_SIZE; i++) {
                 String key = Integer.toString(i);
                 if (this.map1.containsKey(key)) {
                 	vehicleEntity = this.map1.get(key);
@@ -122,7 +118,7 @@ public class ParkingSpot implements Vehicles
 	
 	public void getRegistrationNumbersFromColor(String vehicleColour) 
 	{
-        if (this.MAX_SIZE == 0) {
+        if (this.MAX_LOT_SIZE == 0) {
             System.out.println("Sorry, parking lot is not created");
             System.out.println();
         } else if (this.map3.containsKey(vehicleColour)) {
@@ -143,7 +139,7 @@ public class ParkingSpot implements Vehicles
 	
     public void getSlotNumbersFromColor(String vehicleColour) 
     {
-        if (this.MAX_SIZE == 0) {
+        if (this.MAX_LOT_SIZE == 0) {
             System.out.println("Sorry, parking lot is not created");
             System.out.println();
         } else if (this.map3.containsKey(vehicleColour)) {
@@ -170,7 +166,7 @@ public class ParkingSpot implements Vehicles
     
     public void getSlotNumberFromRegNo(String vehicleRegisterNumber) 
     {
-        if (this.MAX_SIZE == 0) {
+        if (this.MAX_LOT_SIZE == 0) {
             System.out.println("Sorry, parking lot is not created");
             System.out.println();
         } else if (this.map2.containsKey(vehicleRegisterNumber)) {
