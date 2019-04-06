@@ -5,16 +5,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
-import com.interfaces.Vehicles;
+import com.spot.InputParser;
 import com.spot.ParkingSpot;
 
-public class ParkingLot implements Vehicles
+public class ParkingLot
 {
 	private static boolean argFlag = false;
 	private String parameter[];
 	private String absoluteFilePath;
-	private ParkingSpot parkingSpot = null;;
+	private ParkingSpot parkingSpot = null;
+	private InputParser inputParser = null; 
 	
 	public ParkingLot(String[] args)
 	{
@@ -31,17 +33,40 @@ public class ParkingLot implements Vehicles
 		}
 		else
 		{
-			System.out.println("No args passed");
+			parkingLot.readFromCommand();
 		}
 		
 		
 		System.out.println("main() method Finished ");		
+	}
+	
+	public void readFromCommand()
+	{
+		inputParser = new InputParser();
+		parkingSpot = new ParkingSpot();
+		for (;;) {
+            try {
+                BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+                String inputString = bufferRead.readLine();
+                if (inputString.equalsIgnoreCase("exit")) {
+                    break;
+                } else if ((inputString == null) || (inputString.isEmpty())) {
+                    // Do nothing
+                } else {
+                	inputParser.parselineInput(parkingSpot,inputString.trim());
+                }
+            } catch(IOException e) {
+                System.out.println("Oops! Error in reading the input from console.");
+                e.printStackTrace();
+            }
+        }
 	}
 
 	public void extractFile()
 	{
 		File file = new File(absoluteFilePath);
 		parkingSpot = new ParkingSpot();
+		inputParser = new InputParser();
 		try
 		{
 			if(!file.isFile())
@@ -53,21 +78,8 @@ public class ParkingLot implements Vehicles
 				
 					String line = bufferReaded.readLine();
 					while (line != null) 
-					{
-						String lineElement[] = line.split(" ");
-						if(lineElement[0].equalsIgnoreCase("create_parking_lot"))
-						{
-							parkingSpot.createParkinglot(lineElement[1]);
-						}
-						else if (lineElement[0].equalsIgnoreCase("park")) 
-						{
-							parkingSpot.parkVehicle(lineElement[1], lineElement[2]);
-						}
-						else if(lineElement[0].equalsIgnoreCase("leave"))
-						{
-							parkingSpot.removeCarFromSlot(lineElement[1]);
-						}
-						
+					{						
+						inputParser.parselineInput(parkingSpot, line);
 						line = bufferReaded.readLine();
 					}
 			}
@@ -82,16 +94,6 @@ public class ParkingLot implements Vehicles
 		}
 	}
 	
-	public String vehicleRegisterNumber() 
-	{
-		return null;
-	}
-
-	public String vehicleColour() 
-	{
-		return null;
-	}
-
 	public void validateTaskParameters() 
 	{
 		System.out.println("validateTaskParameters() method Started");
