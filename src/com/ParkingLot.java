@@ -22,6 +22,10 @@ public class ParkingLot
 	{
 		this.parameter = args;
 	}
+	public ParkingLot()
+	{
+		
+	}
 	public static void main(String[] args) 
 	{
 		System.out.println("main() method Started");

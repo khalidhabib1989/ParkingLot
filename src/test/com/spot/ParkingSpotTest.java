@@ -6,9 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.spot.ParkingSpot;
@@ -41,10 +39,7 @@ public class ParkingSpotTest
 	public void testParkVehicle() 
 	{
 		parkingSpot.parkVehicle("KA-01-HH-1234", "White");
-		parkingSpot.parkVehicle("KA-01-HH-9999", "White");
-        //assertEquals("Sorry,parkinglotisnotcreated\n" +
-        //        "\n" +
-        //        "Sorry,parkinglotisnotcreated", outContent.toString().trim().replace(" ", ""));
+        assertEquals("Sorry,parkinglotisnotcreated", outContent.toString().trim().replace(" ", ""));
         parkingSpot.createParkinglot("6");
         parkingSpot.parkVehicle("KA-01-HH-1234", "White");
         parkingSpot.parkVehicle("KA-01-HH-9999", "White");
@@ -53,27 +48,21 @@ public class ParkingSpotTest
 
 	@Test
 	public void testRemoveCarFromSlot() {
-		fail("Not yet implemented");
+		parkingSpot.removeCarFromSlot("2");
+        assertEquals("Sorry,parkinglotisnotcreated", outContent.toString().trim().replace(" ", ""));
+        parkingSpot.createParkinglot("6");
+        parkingSpot.parkVehicle("KA-01-HH-1234", "White");
+        parkingSpot.parkVehicle("KA-01-HH-9999", "White");
+        parkingSpot.removeCarFromSlot("4");
 	}
 
 	@Test
 	public void testStatus() {
-		fail("Not yet implemented");
+		parkingSpot.status();
+        assertEquals("Sorry,parkinglotisnotcreated", outContent.toString().trim().replace(" ", ""));
+        parkingSpot.createParkinglot("6");
+        parkingSpot.parkVehicle("KA-01-HH-1234", "White");
+        parkingSpot.parkVehicle("KA-01-HH-9999", "White");
+        parkingSpot.status();
 	}
-
-	@Test
-	public void testGetRegistrationNumbersFromColor() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetSlotNumbersFromColor() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetSlotNumberFromRegNo() {
-		fail("Not yet implemented");
-	}
-
 }

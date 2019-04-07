@@ -2,7 +2,6 @@ package com.spot;
 
 public class InputParser
 {
-	private ParkingSpot parkingSpot = null;
 	
 	public void parselineInput(ParkingSpot parkingSpot, String line)
 	{
