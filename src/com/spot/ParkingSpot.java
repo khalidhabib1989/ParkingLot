@@ -10,8 +10,8 @@ import com.interfaces.Vehicles;
 
 public class ParkingSpot implements Vehicles
 {
-	private int MAX_LOT_SIZE = 0;
-    ArrayList<Integer> availableSlotList;
+	public int MAX_LOT_SIZE = 0;
+    public ArrayList<Integer> availableSlotList;
     Map<String, VehicleEntity> map1;
     Map<String, String> map2;
     Map<String, ArrayList<String>> map3;
@@ -21,7 +21,7 @@ public class ParkingSpot implements Vehicles
 		try {
             this.MAX_LOT_SIZE = Integer.parseInt(lotSize);
         } catch (Exception e) {
-            System.out.println("Invalid lot count");
+            System.out.println("Invalid lot size");
             System.out.println();
         }
         this.availableSlotList = new ArrayList<Integer>() {};

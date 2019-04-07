@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="run">
+	<target name="setup">
+		<echo message="setup is starting"/>
+		<mkdir dir="temp"/>
+		<mkdir dir="temp/classes"/>
+		<mkdir dir="lib"/>
+	</target>
+	<target name="cleanup">
+		<echo message="cleaning started"/>
+		<delete dir="temp"/>
+		<mkdir dir="temp"/>
+		<mkdir dir="temp/classes"/>
+		<delete dir="lib"/>
+		<mkdir dir="lib"/>
+	</target>
+	<target name="compile"
+				depends="cleanup">
+		<echo message="compilation started"/>
+		<javac includeantruntime="false" srcdir="src"
+				destdir="temp/classes"/>
+	</target>
+	<target name="jar"
+				depends="compile">
+		<echo message="Making a jar started"/>
+		<jar basedir="temp/classes"
+				destfile="lib/parkinglot.jar"/>
+	</target>
+	<target name="run" depends="jar">
+		<java classpath="temp/classes"
+				classname="com.ParkingLot"/>
+	</target>
+</project>
