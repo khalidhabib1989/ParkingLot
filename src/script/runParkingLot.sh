@@ -2,7 +2,7 @@
 # shell Scripts for parking lot
 # NOTE : Please change Java path and classpath before run below scripts
 JAVA=/sbcimp/lib/jvm/jdk1.8.0_02//bin/java
-CLASSPATH=/home/habibk/public/lib/parkinglot.jar:
+CLASSPATH=@base_dir@/lib/parkinglot.jar:
 if(( $#==0 ))
   then
     $JAVA -cp $CLASSPATH com.ParkingLot

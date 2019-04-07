@@ -22,8 +22,18 @@
 				destdir="${basedir}/temp/classes"
 				target="${jre.version}" source="${jre.version}"/>
 	</target>
+	<target name="build" depends="compile">
+		<copy todir="${basedir}">
+			<fileset dir="${basedir}/lib">
+				<include name="**/*"/>
+			</fileset>
+		</copy>	
+		<replace dir="${basedir}/src/script" token="@base_dir@" value="${basedir}">
+			<include name="**/*.sh"/>
+		</replace>	
+	</target>
 	<target name="jar"
-				depends="compile">
+				depends="build">
 		<echo message="Making a jar started"/>
 		<jar basedir="${basedir}/temp/classes"
 				destfile="${basedir}/lib/parkinglot.jar"/>
